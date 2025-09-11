@@ -32,37 +32,45 @@ public class Persona implements IPersona{
 
 //--------------------------------------------------------------
     // Getters and Setters
+    @Override
     public String getNombre() {
         return nombre;
     }
 
+    @Override
     public void setNombre(String nuevoNombre) {
         this.nombre = nuevoNombre;
     }
 
     
+    @Override
     public String getApellido() {
         return apellido;
     }
 
+    @Override
     public void setApellido(String nuevoApellido) {
         this.apellido = nuevoApellido;
     }
 
 
+    @Override
     public int getEdad() {
         return edad;
     }
 
+    @Override
     public void setEdad(int nuevaEdad) {
         this.edad = nuevaEdad;
     }
 
 
+    @Override
     public double getDni() {
         return dni;
     }
 
+    @Override
     public void setDni(double nuevoDni) {
         this.dni = nuevoDni;
     }

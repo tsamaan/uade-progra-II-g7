@@ -78,46 +78,27 @@ public interface IListaDoble {
     // Pre: Lista no vacía
     // Pos: Retorna el dato del primer nodo
     // Ax: obtenerPrimero() = getPrimero().getDato()
-<<<<<<< HEAD
     public IVehiculo obtenerPrimero();
-=======
-    public int obtenerPrimero();
->>>>>>> main
 
     // Pre: Lista no vacía
     // Pos: Retorna el dato del último nodo
     // Ax: obtenerUltimo() = getUltimo().getDato()
-<<<<<<< HEAD
     public IVehiculo obtenerUltimo();
-=======
-    public int obtenerUltimo();
->>>>>>> main
 
     // Pre: posicion válida
     // Pos: Retorna el dato del nodo en la posición indicada
     // Ax: obtenerPosicion(posicion) = nodo en esa posición
-<<<<<<< HEAD
     public IVehiculo obtenerPosicion(int posicion);
-=======
-    public  int obtenerPosicion(int posicion);
->>>>>>> main
 
     // Pre: Lista creada
     // Pos: Retorna la cantidad de nodos
     // Ax: cantidadElementos() = getCantidad()
     public int cantidadElementos();
 
-<<<<<<< HEAD
     // Pre: patente definida
     // Pos: Devuelve la posición del vehículo con esa patente o -1 si no está
     // Ax: buscarSecuencial(patente) = posición o -1
     public  int buscarSecuencial(String patente);
-=======
-    // Pre: dato definido
-    // Pos: Devuelve la posición del dato o -1 si no está
-    // Ax: buscarSecuencial(dato) = posición o -1
-    public  int buscarSecuencial(int dato);
->>>>>>> main
 
     // Pre: Lista creada
     // Pos: Ordena los nodos en forma ascendente

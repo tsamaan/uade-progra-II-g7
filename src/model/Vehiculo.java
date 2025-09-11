@@ -30,37 +30,42 @@ public class Vehiculo implements IVehiculo{
 //--------------------------------------------------------------   
  
     // Getters and Setters
+    @Override
     public String getPatente() {
         return patente;
     }
 
+    @Override
     public void setPatente(String patente) {
         this.patente = patente;
     }
 
-
+    @Override
     public String getMarca() {
         return marca;
     }
 
+    @Override
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
-
+    @Override
     public String getModelo() {
         return modelo;
     }
 
+    @Override
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }   
 
-
+    @Override
     public int getAnio() {
         return anio;
     }
 
+    @Override
     public void setAnio(int anio) {
         this.anio = anio;
     }  

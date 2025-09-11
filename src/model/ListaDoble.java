@@ -2,6 +2,7 @@ package model;
 
 import interfaces.IListaDoble;
 import interfaces.INodo;
+import interfaces.IVehiculo; // Import agregado: se usaba IVehiculo sin importar
 
 public class ListaDoble implements IListaDoble {
     
@@ -28,30 +29,32 @@ public class ListaDoble implements IListaDoble {
 //--------------------------------------------------------------
     
     // Getters y Setters
+    @Override
     public INodo getPrimero() {
         return primero;
     }
 
+    @Override
     public void setPrimero(INodo nuevoPrimero) {
         this.primero = nuevoPrimero;
     }
 
+    @Override
     public INodo getUltimo() {
         return ultimo;
     }
 
-<<<<<<< HEAD
+    @Override
     public void setUltimo(INodo nuevoUltimo) {
-=======
-    public void setUltimo(Nodo nuevoUltimo) {
->>>>>>> main
         this.ultimo = nuevoUltimo;
     }
 
+    @Override
     public int getCantidad() {
         return cantidad;
     }
 
+    @Override
     public void setCantidad(int nuevaCantidad) {
         this.cantidad = nuevaCantidad;
     }
@@ -101,11 +104,7 @@ public class ListaDoble implements IListaDoble {
     @Override
     public void insertarPosicion(INodo dato, int posicion) {
         if (posicion < 0 || posicion > cantidad) {
-<<<<<<< HEAD
             return; // No hacer nada si la posición es inválida
-=======
-            throw new IndexOutOfBoundsException("Posición inválida");
->>>>>>> main
         }
         if (posicion == 0) {
             insertarPrimero(dato);
@@ -133,11 +132,7 @@ public class ListaDoble implements IListaDoble {
     @Override
     public void eliminarPrimero() {
         if (esVacia()) {
-<<<<<<< HEAD
             return; // No hacer nada si la lista está vacía
-=======
-            throw new IllegalStateException("\n[!] La lista esta vacia");
->>>>>>> main
         }
         if (cantidad == 1) { //si hay un solo nodo
             setPrimero(null);
@@ -153,11 +148,7 @@ public class ListaDoble implements IListaDoble {
     @Override
     public void eliminarUltimo() {
         if (esVacia()) {
-<<<<<<< HEAD
             return; // No hacer nada si la lista está vacía
-=======
-            throw new IllegalStateException("\n[!] La lista esta vacia");
->>>>>>> main
         }
         if (cantidad == 1) { //si hay un solo nodo
             setPrimero(null);
@@ -171,7 +162,6 @@ public class ListaDoble implements IListaDoble {
     }
 
     @Override
-<<<<<<< HEAD
     public void eliminarPosicion(int posicion) {
         if (posicion < 0 || posicion >= cantidad || esVacia()) {
             return; // No hacer nada si la posición es inválida o la lista está vacía
@@ -191,14 +181,10 @@ public class ListaDoble implements IListaDoble {
             cantidad--;
         }
     }   
-=======
-    public void eliminarPosicion(int posicion) {}   
->>>>>>> main
 
     //--------------------------------------------------------------
 
     @Override
-<<<<<<< HEAD
     public IVehiculo obtenerPrimero() {
         if (esVacia()) {
             return null;
@@ -224,20 +210,6 @@ public class ListaDoble implements IListaDoble {
             actual = actual.getSiguiente();
         }
         return actual.getDato();
-=======
-    public int obtenerPrimero() {
-        return cantidad;
-    }
-
-    @Override
-    public int obtenerUltimo() {
-        return cantidad;
-    }
-
-    @Override
-    public int obtenerPosicion(int posicion) {
-        return cantidad;
->>>>>>> main
     }
 
     //--------------------------------------------------------------
@@ -248,7 +220,6 @@ public class ListaDoble implements IListaDoble {
     }
 
     @Override
-<<<<<<< HEAD
     public int buscarSecuencial(String patente) {
         if (esVacia() || patente == null) {
             return -1;
@@ -265,14 +236,10 @@ public class ListaDoble implements IListaDoble {
             posicion++;
         }
         
-=======
-    public int buscarSecuencial(int dato) {
->>>>>>> main
         return -1;
     }
 
     @Override
-<<<<<<< HEAD
     public void ordenarLista() {
         if (esVacia() || cantidad == 1) {
             return; // No hay nada que ordenar
@@ -320,18 +287,8 @@ public class ListaDoble implements IListaDoble {
         System.out.println("========================\n");
     }
 
-=======
-    public void ordenarLista() {}
 
     @Override
-    public void mostrarLista() {}
-
-    @Override
-    public void setUltimo(INodo nuevoUltimo) {
-        this.ultimo = nuevoUltimo; //modificar despues?
-    }
->>>>>>> main
-
     public String toString() {
         String datos = "";
         INodo actual = primero;
