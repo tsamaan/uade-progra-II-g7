@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface IListaDoble {
+public interface IListaDoble<T> {
 
 //--------------------------------------------------------------
     // Getters - Setters
@@ -9,22 +9,22 @@ public interface IListaDoble {
     // Pre: Lista creada
     // Pos: Devuelve el primer nodo
     // Ax: getPrimero() = primer nodo o null si vacía
-    public INodo getPrimero();
+    public INodo<T> getPrimero();
 
     // Pre: Lista creada
     // Pos: El primer nodo es actualizado
     // Ax: getPrimero() = nuevoPrimero luego de setPrimero(nuevoPrimero)
-    public void setPrimero(INodo nuevoPrimero);
+    public void setPrimero(INodo<T> nuevoPrimero);
 
     // Pre: Lista creada
     // Pos: Devuelve el último nodo
     // Ax: getUltimo() = último nodo o null si vacía
-    public INodo getUltimo();
+    public INodo<T> getUltimo();
 
     // Pre: Lista creada
     // Pos: El último nodo es actualizado
     // Ax: getUltimo() = nuevoUltimo luego de setUltimo(nuevoUltimo)
-    public void setUltimo(INodo nuevoUltimo);
+    public void setUltimo(INodo<T> nuevoUltimo);
 
     // Pre: Lista creada
     // Pos: Devuelve la cantidad de nodos
@@ -48,17 +48,17 @@ public interface IListaDoble {
     // Pre: dato definido
     // Pos: Inserta el nodo al inicio
     // Ax: getPrimero() = dato luego de insertarPrimero(dato)
-    public void insertarPrimero(INodo dato);
+    public void insertarPrimero(INodo<T> dato);
 
     // Pre: dato definido
     // Pos: Inserta el nodo al final
     // Ax: getUltimo() = dato luego de insertarUltimo(dato)
-    public void insertarUltimo(INodo dato);
+    public void insertarUltimo(INodo<T> dato);
 
     // Pre: posicion válida, dato definido
     // Pos: Inserta el nodo en la posición indicada
     // Ax: obtenerPosicion(posicion) = dato luego de insertarPosicion(dato, posicion)
-    public void insertarPosicion(INodo dato, int posicion);
+    public void insertarPosicion(INodo<T> dato, int posicion);
 
     // Pre: Lista no vacía
     // Pos: Elimina el primer nodo
@@ -78,17 +78,17 @@ public interface IListaDoble {
     // Pre: Lista no vacía
     // Pos: Retorna el dato del primer nodo
     // Ax: obtenerPrimero() = getPrimero().getDato()
-    public IVehiculo obtenerPrimero();
+    public T obtenerPrimero();
 
     // Pre: Lista no vacía
     // Pos: Retorna el dato del último nodo
     // Ax: obtenerUltimo() = getUltimo().getDato()
-    public IVehiculo obtenerUltimo();
+    public T obtenerUltimo();
 
     // Pre: posicion válida
     // Pos: Retorna el dato del nodo en la posición indicada
     // Ax: obtenerPosicion(posicion) = nodo en esa posición
-    public IVehiculo obtenerPosicion(int posicion);
+    public T obtenerPosicion(int posicion);
 
     // Pre: Lista creada
     // Pos: Retorna la cantidad de nodos

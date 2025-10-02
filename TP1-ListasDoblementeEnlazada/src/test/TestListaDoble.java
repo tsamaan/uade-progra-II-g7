@@ -11,7 +11,7 @@ public class TestListaDoble {
         System.out.println("=== PRUEBA DE LISTA DOBLEMENTE ENLAZADA ===\n");
 
         // Crear una lista doble
-        ListaDoble lista = new ListaDoble();
+        ListaDoble<Vehiculo> lista = new ListaDoble<>();
         
         // Crear vehículos de ejemplo
         Vehiculo v1 = new Vehiculo("ZZZ999", "Toyota", "Corolla", 2020);
@@ -20,10 +20,10 @@ public class TestListaDoble {
         Vehiculo v4 = new Vehiculo("BBB222", "Chevrolet", "Cruze", 2021);
         
         // Crear nodos con los vehículos
-        Nodo nodo1 = new Nodo(v1);
-        Nodo nodo2 = new Nodo(v2);
-        Nodo nodo3 = new Nodo(v3);
-        Nodo nodo4 = new Nodo(v4);
+        Nodo<Vehiculo> nodo1 = new Nodo<>(v1);
+        Nodo<Vehiculo> nodo2 = new Nodo<>(v2);
+        Nodo<Vehiculo> nodo3 = new Nodo<>(v3);
+        Nodo<Vehiculo> nodo4 = new Nodo<>(v4);
 
         System.out.println("1. INSERTANDO ELEMENTOS:");
         System.out.println("   - Insertando al inicio: " + v1.getPatente());

@@ -4,16 +4,16 @@ import interfaces.IListaDoble;
 import interfaces.INodo;
 import interfaces.IVehiculo; // Import agregado: se usaba IVehiculo sin importar
 
-public class ListaDoble implements IListaDoble {
+public class ListaDoble<T> implements IListaDoble<T> {
     
-    private INodo primero;
-    private INodo ultimo;
+    private INodo<T> primero;
+    private INodo<T> ultimo;
     private int cantidad;
 
 //--------------------------------------------------------------
 
     // Constructor Full
-    public ListaDoble (INodo primero, INodo ultimo, int cantidad) {
+    public ListaDoble (INodo<T> primero, INodo<T> ultimo, int cantidad) {
         this.primero = primero;
         this.ultimo = ultimo;
         this.cantidad = cantidad;
@@ -30,22 +30,22 @@ public class ListaDoble implements IListaDoble {
     
     // Getters y Setters
     @Override
-    public INodo getPrimero() {
+    public INodo<T> getPrimero() {
         return primero;
     }
 
     @Override
-    public void setPrimero(INodo nuevoPrimero) {
+    public void setPrimero(INodo<T> nuevoPrimero) {
         this.primero = nuevoPrimero;
     }
 
     @Override
-    public INodo getUltimo() {
+    public INodo<T> getUltimo() {
         return ultimo;
     }
 
     @Override
-    public void setUltimo(INodo nuevoUltimo) {
+    public void setUltimo(INodo<T> nuevoUltimo) {
         this.ultimo = nuevoUltimo;
     }
 
@@ -70,8 +70,8 @@ public class ListaDoble implements IListaDoble {
     //--------------------------------------------------------------
 
     @Override
-    public void insertarPrimero(INodo dato) {
-        Nodo nuevoNodo = (Nodo) dato;
+    public void insertarPrimero(INodo<T> dato) {
+        INodo<T> nuevoNodo = (INodo<T>) dato;
         if (esVacia()) { //pregunta si la lista esta vacia
             setPrimero(nuevoNodo); //si esta vacia ultimo y primero son el mismo
             setUltimo(nuevoNodo);
@@ -86,8 +86,8 @@ public class ListaDoble implements IListaDoble {
     }
 
     @Override
-    public void insertarUltimo(INodo dato) {
-        Nodo nuevoNodo = (Nodo) dato;
+    public void insertarUltimo(INodo<T> dato) {
+        INodo<T> nuevoNodo = (INodo<T>) dato;
         if (esVacia()) { //pregunta si la lista esta vacia
             setPrimero(nuevoNodo); //si esta vacia ultimo y primero son el mismo
             setUltimo(nuevoNodo);
@@ -99,10 +99,11 @@ public class ListaDoble implements IListaDoble {
         }
 
         setCantidad(getCantidad() + 1); //suma la cantidad de nodos en 1
+        // setCantidad(cantidad++); //otra forma de hacerlo
     }
 
     @Override
-    public void insertarPosicion(INodo dato, int posicion) {
+    public void insertarPosicion(INodo<T> dato, int posicion) {
         if (posicion < 0 || posicion > cantidad) {
             return; // No hacer nada si la posición es inválida
         }
@@ -113,8 +114,8 @@ public class ListaDoble implements IListaDoble {
             insertarUltimo(dato);
         } 
         else {
-            Nodo nuevoNodo = (Nodo) dato;
-            INodo actual = primero;
+            INodo<T> nuevoNodo = (INodo<T>) dato;
+            INodo<T> actual = primero;
 
             for (int i = 0; i < posicion - 1; i++) {
                 actual = actual.getSiguiente();
@@ -172,7 +173,7 @@ public class ListaDoble implements IListaDoble {
         } else if (posicion == cantidad - 1) {
             eliminarUltimo();
         } else {
-            INodo actual = primero;
+            INodo<T> actual = primero;
             for (int i = 0; i < posicion; i++) {
                 actual = actual.getSiguiente();
             }
@@ -185,7 +186,7 @@ public class ListaDoble implements IListaDoble {
     //--------------------------------------------------------------
 
     @Override
-    public IVehiculo obtenerPrimero() {
+    public T obtenerPrimero() {
         if (esVacia()) {
             return null;
         }
@@ -193,7 +194,7 @@ public class ListaDoble implements IListaDoble {
     }
 
     @Override
-    public IVehiculo obtenerUltimo() {
+    public T obtenerUltimo() {
         if (esVacia()) {
             return null;
         }
@@ -201,11 +202,11 @@ public class ListaDoble implements IListaDoble {
     }
 
     @Override
-    public IVehiculo obtenerPosicion(int posicion) {
+    public T obtenerPosicion(int posicion) {
         if (posicion < 0 || posicion >= cantidad) {
             return null;
         }
-        INodo actual = primero;
+        INodo<T> actual = primero;
         for (int i = 0; i < posicion; i++) {
             actual = actual.getSiguiente();
         }
@@ -224,8 +225,8 @@ public class ListaDoble implements IListaDoble {
         if (esVacia() || patente == null) {
             return -1;
         }
-        
-        INodo actual = primero;
+
+        INodo<T> actual = primero;
         int posicion = 0;
         
         while (actual != null) {
@@ -249,7 +250,7 @@ public class ListaDoble implements IListaDoble {
         boolean intercambio;
         do {
             intercambio = false;
-            INodo actual = primero;
+            INodo<T> actual = primero;
             
             while (actual.getSiguiente() != null) {
                 if (actual.getDato().getPatente().compareTo(actual.getSiguiente().getDato().getPatente()) > 0) {
@@ -274,8 +275,8 @@ public class ListaDoble implements IListaDoble {
         System.out.println("\n=== LISTA DE VEHÍCULOS ===");
         System.out.println("Cantidad de elementos: " + cantidad);
         System.out.println("------------------------");
-        
-        INodo actual = primero;
+
+        INodo<T> actual = primero;
         int posicion = 0;
         
         while (actual != null) {
@@ -291,7 +292,7 @@ public class ListaDoble implements IListaDoble {
     @Override
     public String toString() {
         String datos = "";
-        INodo actual = primero;
+        INodo<T> actual = primero;
         while (actual != null) { // se puede hacer con for tambien por la cantidad de nodos que hay la sabemos
             datos += actual.getDato().toString() + ", ";
             actual = actual.getSiguiente();

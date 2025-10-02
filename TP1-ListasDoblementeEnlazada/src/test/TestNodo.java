@@ -10,9 +10,9 @@ public class TestNodo {
         Vehiculo vehiculo2 = new Vehiculo("DEF456", "Honda", "Civic", 2019);
         Vehiculo vehiculo3 = new Vehiculo("GHI789", "Ford", "Focus", 2018);
 
-        Nodo nodo1 = new Nodo(vehiculo1);
-        Nodo nodo2 = new Nodo(vehiculo2);
-        Nodo nodo3 = new Nodo(vehiculo3);
+        Nodo<Vehiculo> nodo1 = new Nodo<>(vehiculo1);
+        Nodo<Vehiculo> nodo2 = new Nodo<>(vehiculo2);
+        Nodo<Vehiculo> nodo3 = new Nodo<>(vehiculo3);
 
         nodo1.setSiguiente(nodo2);
         nodo2.setAnterior(nodo1);

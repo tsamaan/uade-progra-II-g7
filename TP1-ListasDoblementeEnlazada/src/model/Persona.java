@@ -8,7 +8,7 @@ public class Persona implements IPersona{
     private String apellido;
     private int edad;
     private double dni;
-    private ListaDoble listaVehiculos; // Lista de vehículos asociada a la persona
+    private ListaDoble<Vehiculo> listaVehiculos; // Lista de vehículos asociada a la persona
 
 //--------------------------------------------------------------    
 
@@ -84,15 +84,15 @@ public class Persona implements IPersona{
     
 //--------------------------------------------------------------
 
-    public ListaDoble getListaVehiculos() {
+    public ListaDoble<Vehiculo> getListaVehiculos() {
         return listaVehiculos;
     }
-    public void setListaVehiculos(ListaDoble listaVehiculos) { //esto setea por una lista ya creada!
+    public void setListaVehiculos(ListaDoble<Vehiculo> listaVehiculos) { //esto setea por una lista ya creada!
         this.listaVehiculos = listaVehiculos;
     }
 
     public void agregarVehiculo(Vehiculo vehiculo) { //metodo que agrega un vehiculo a la lista de vehiculos
-        Nodo nuevoNodo = new Nodo(vehiculo);
+        Nodo<Vehiculo> nuevoNodo = new Nodo<>(vehiculo);
         this.listaVehiculos.insertarUltimo(nuevoNodo); //usa insertarUltimo de ListaDoble
     
     
