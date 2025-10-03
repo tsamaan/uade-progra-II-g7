@@ -33,26 +33,6 @@ public interface INodo<T> {
     public void setDerecho(INodo<T> derecho);
 
     // Pre: El nodo debe estar inicializado
-    // Pos: Retorna la referencia al siguiente nodo en la lista enlazada o null
-    // Ax: getSiguiente() = referencia al siguiente nodo o null
-    INodo<T> getSiguiente();
-
-    // Pre: El nodo debe estar inicializado
-    // Pos: Retorna la referencia al anterior nodo en la lista enlazada o null
-    // Ax: getAnterior() = referencia al anterior nodo o null
-    INodo<T> getAnterior();
-
-    // Pre: -
-    // Pos: Establece el siguiente nodo en la lista enlazada
-    // Ax: setSiguiente(nodo) -> getSiguiente() = nodo
-    void setSiguiente(INodo<T> nuevoSiguiente);
-
-    // Pre: -
-    // Pos: Establece el anterior nodo en la lista enlazada
-    // Ax: setAnterior(nodo) -> getAnterior() = nodo
-    public void setAnterior(INodo<T> actual);
-
-    // Pre: El nodo debe estar inicializado
     // Pos: Retorna una representación en cadena del nodo
     // Ax: toString() = representación textual del nodo con su dato
     public String toString();

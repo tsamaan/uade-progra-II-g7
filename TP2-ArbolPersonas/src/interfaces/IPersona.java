@@ -15,7 +15,7 @@ public interface IPersona {
     // Pre: La persona debe estar inicializada
     // Pos: Retorna la edad de la persona
     // Ax: getDni() = dni almacenado
-    public int getDNI();
+    public long getDni();
     
     // Pre: edad >= 0
     // Pos: Establece la edad de la persona
