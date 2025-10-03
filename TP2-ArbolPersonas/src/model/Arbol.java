@@ -2,7 +2,7 @@ package model;
 
 import interfaces.IArbol;
 import interfaces.INodo;
-public class Arbol<T> implements IArbol<T> {
+public class Arbol<T extends Comparable<T>> implements IArbol<T> {
     
     private INodo<T> raiz;
     private int cantNodos;
@@ -40,7 +40,8 @@ public class Arbol<T> implements IArbol<T> {
 
     @Override
     public void insertar(T dato) {
-        // Implementación del metodo insertar
+        raiz = insertarRecursivo(raiz, dato);
+        cantNodos++;
     }
 
     @Override
@@ -73,4 +74,32 @@ public class Arbol<T> implements IArbol<T> {
     public String toString() {
         return "Arbol con " + cantNodos + " nodos.";
     }
+
+
+// ---- Metodos privados auxiliares
+
+    private INodo<T> insertarRecursivo(INodo<T> nodo, T dato) {
+        if (nodo == null) {
+            return new Nodo<>(dato);
+        }
+
+        if (dato < nodo.getDato()) {
+            nodo.setIzquierdo(insertarRecursivo(nodo.getIzquierdo(), dato));
+        } else if (dato > nodo.getDato()) {
+            nodo.setDerecho(insertarRecursivo(nodo.getDerecho(), dato));
+        } else {
+            return nodo; // no permite duplicados
+        }
+
+        return nodo;
+    }
+
+
+
+
+
+
+
+
+
 }
