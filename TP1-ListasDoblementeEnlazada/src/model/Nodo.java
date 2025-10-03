@@ -47,8 +47,8 @@ public class Nodo<T> implements INodo<T>{
 
     @Override
     public String toString() {
-        String anteriorPatente = (anterior != null && anterior.getDato() != null) ? anterior.getDato().getPatente() : "null";
-        String siguientePatente = (siguiente != null && siguiente.getDato() != null) ? siguiente.getDato().getPatente() : "null";
+        String anteriorPatente = (anterior != null && anterior.getDato() != null) ? ((IVehiculo) anterior.getDato()).getPatente() : "null";
+        String siguientePatente = (siguiente != null && siguiente.getDato() != null) ? ((IVehiculo) siguiente.getDato()).getPatente() : "null";
         return "\n-----------------------------" +
                "\n Nodo:" +
                "\n   Anterior:  " + anteriorPatente +
@@ -56,5 +56,4 @@ public class Nodo<T> implements INodo<T>{
                "\n   Siguiente: " + siguientePatente +
                "\n-----------------------------\n";
     }
-
 }
