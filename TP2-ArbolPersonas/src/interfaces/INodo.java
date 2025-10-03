@@ -33,7 +33,7 @@ public interface INodo<T> {
     public void setDerecho(INodo<T> derecho);
 
     // Pre: El nodo debe estar inicializado
-    // Pos: Retorna una representación en cadena del nodo
-    // Ax: toString() = representación textual del nodo con su dato
+    // Pos: Retorna una representacion en cadena del nodo
+    // Ax: toString() = representacion textual del nodo con su dato
     public String toString();
 }
