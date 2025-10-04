@@ -25,32 +25,32 @@ public interface IArbol<T> {
     // Pre: dato != null
     // Pos: El dato se inserta en el arbol respetando el orden BST
     // Ax: insertar(dato) -> buscar(dato) = true
-    public void insertar(T dato);
+    public INodo<T> insertarRecursivo(INodo<T> nodo, T dato);
 
     // Pre: dato != null
     // Pos: Retorna true si el dato esta en el arbol, false en caso contrario
     // Ax: buscar(dato) = true <-> dato esta en arbol
-    public boolean buscar(T dato);
+    public boolean buscarRecursivo(INodo<T> nodo, T dato);
 
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en orden (izq-raiz-der)
     // Ax: recorridoInorden() = secuencia ordenada ascendente de elementos
-    public void recorridoInorden();
+    public void recorridoInorden(INodo<T> nodo);
     
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en preorden (raiz-izq-der)
     // Ax: recorridoPreorden() = secuencia con raiz primero, luego subarboles
-    public void recorridoPreorden();
+    public void recorridoPreorden(INodo<T> nodo);
     
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en postorden (izq-der-raiz)
     // Ax: recorridoPostorden() = secuencia con subarboles primero, luego raiz
-    public void recorridoPostorden();
+    public void recorridoPostorden(INodo<T> nodo);
 
     // Pre: dato != null
     // Pos: Elimina el dato del arbol manteniendo la propiedad BST
     // Ax: eliminar(dato) -> buscar(dato) = false
-    public void eliminar(T dato);
+    public INodo<T> eliminarRecursivo(INodo<T> nodo, T dato);
 
     // Pre: El arbol debe estar inicializado
     // Pos: Retorna una representacion en cadena del arbol
