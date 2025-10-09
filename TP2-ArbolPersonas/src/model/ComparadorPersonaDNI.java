@@ -3,7 +3,7 @@ package model;
 import java.util.Comparator;
 import interfaces.IComparadorPersona;
 
-public class ComparadorPersona implements IComparadorPersona, Comparator<Persona> {
+public class ComparadorPersonaDNI implements IComparadorPersona, Comparator<Persona> {
     
     @Override
     public int compare(Persona p1, Persona p2) {

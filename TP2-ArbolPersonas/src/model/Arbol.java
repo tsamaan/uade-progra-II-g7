@@ -2,17 +2,18 @@ package model;
 
 import interfaces.IArbol;
 import interfaces.INodo;
-import java.util.Comparator;
+import interfaces.IComparadorPersona;
+
 
 public class Arbol<T> implements IArbol<T> {
     
     private INodo<T> raiz;
     private int cantNodos;
-    private Comparator<T> comparador;
+    private IComparadorPersona comparador;
     
 // ---- Constructor
 
-    public Arbol(Comparator<T> comparador) {
+    public Arbol(IComparadorPersona comparador) {
         this.raiz = null;
         this.cantNodos = 0;
         this.comparador = comparador;
@@ -42,20 +43,21 @@ public class Arbol<T> implements IArbol<T> {
 
 // ---- Metodos de la interfaz IArbol
 
-    @Override
-    public INodo<T> insertarRecursivo(INodo<T> nodo, T dato) {
+    @Override                                                   // Se usa un callback para comparar 
+    public INodo<T> insertarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador) {
+         // Caso base: Si el nodo es null, hemos encontrado la posición para insertar
         if (nodo == null) {
             cantNodos++;
             return new Nodo<>(dato); // Crear y retornar el nuevo nodo insertado.
         }
 
-        int comparacion = comparador.compare(dato, nodo.getDato());
+        int comparacion = comparador.compare((Persona) dato, (Persona) nodo.getDato());
         
         if (comparacion < 0) {
-            nodo.setIzquierdo(insertarRecursivo(nodo.getIzquierdo(), dato));
+            nodo.setIzquierdo(insertarRecursivo(nodo.getIzquierdo(), dato, comparador));
         } 
         else if (comparacion > 0) {
-            nodo.setDerecho(insertarRecursivo(nodo.getDerecho(), dato));
+            nodo.setDerecho(insertarRecursivo(nodo.getDerecho(), dato, comparador));
         } 
         else {
             return nodo; // no permite duplicados
@@ -64,66 +66,54 @@ public class Arbol<T> implements IArbol<T> {
         return nodo;
     }
 
-    @Override
-    public boolean buscarRecursivo(INodo<T> nodo, T dato){
+    @Override                                               // Se usa un callback para comparar
+    public boolean buscarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador) {
+         // Caso base: Si el nodo es null, el elemento no está en el árbol
         if (nodo == null) {
             return false;
         }
 
-        int comparacion = comparador.compare(dato, nodo.getDato());
+        int comparacion = comparador.compare((Persona) dato, (Persona) nodo.getDato());
         
         if (comparacion == 0) {
             return true; // Elemento encontrado
         } else if (comparacion < 0) {
-            return buscarRecursivo(nodo.getIzquierdo(), dato);
+            return buscarRecursivo(nodo.getIzquierdo(), dato, comparador);
         } else {
-            return buscarRecursivo(nodo.getDerecho(), dato);
+            return buscarRecursivo(nodo.getDerecho(), dato, comparador);
         }
     }
 
 
     @Override
-    public void recorridoInorden(INodo<T> nodo) {
-        if (nodo != null) {
-            recorridoInorden(nodo.getIzquierdo());   // Recorrer subárbol izquierdo
-            System.out.println(nodo.getDato());      // Procesar nodo actual
-            recorridoInorden(nodo.getDerecho());     // Recorrer subárbol derecho
-        }
+    public void recorridoInorden() {
+        inordenRecursivo(raiz);
     }
 
     @Override
-    public void recorridoPreorden(INodo<T> nodo) {
-        if (nodo != null) {
-            System.out.println(nodo.getDato());      // Procesar nodo actual
-            recorridoPreorden(nodo.getIzquierdo());  // Recorrer subárbol izquierdo
-            recorridoPreorden(nodo.getDerecho());    // Recorrer subárbol derecho
-        }
+    public void recorridoPreorden() {
+        preordenRecursivo(raiz);
     }
 
     @Override
-    public void recorridoPostorden(INodo<T> nodo) {
-        if (nodo != null) {
-            recorridoPostorden(nodo.getIzquierdo()); // Recorrer subárbol izquierdo
-            recorridoPostorden(nodo.getDerecho());   // Recorrer subárbol derecho
-            System.out.println(nodo.getDato());      // Procesar nodo actual
-        }
+    public void recorridoPostorden() {
+        postordenRecursivo(raiz);
     }
 
-
-    @Override
-    public INodo<T> eliminarRecursivo(INodo<T> nodo, T dato) {
+    @Override                                               // Se usa un callback para comparar
+    public INodo<T> eliminarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador) {
          // CASO 1: Nodo no encontrado (árbol vacío o llegamos al final)
         if (nodo == null) {
             return null; // No hay nada que eliminar
         }
 
-        int comparacion = comparador.compare(dato, nodo.getDato());
+        int comparacion = comparador.compare((Persona) dato, (Persona) nodo.getDato());
         
         // Navegar hacia la izquierda o derecha para encontrar el nodo
         if (comparacion < 0) {
-            nodo.setIzquierdo(eliminarRecursivo(nodo.getIzquierdo(), dato));
+            nodo.setIzquierdo(eliminarRecursivo(nodo.getIzquierdo(), dato, comparador));
         } else if (comparacion > 0) {
-            nodo.setDerecho(eliminarRecursivo(nodo.getDerecho(), dato));
+            nodo.setDerecho(eliminarRecursivo(nodo.getDerecho(), dato, comparador));
         } else {
             // NODO ENCONTRADO - Proceder con los 4 casos de eliminación
             cantNodos--; // Decrementar contador solo cuando eliminamos realmente
@@ -148,7 +138,7 @@ public class Arbol<T> implements IArbol<T> {
                 nodo.setDato(sucesor.getDato());
                 // Eliminar el sucesor (compensar contador porque será decrementado nuevamente)
                 cantNodos++;
-                nodo.setDerecho(eliminarRecursivo(nodo.getDerecho(), sucesor.getDato()));
+                nodo.setDerecho(eliminarRecursivo(nodo.getDerecho(), sucesor.getDato(), comparador));
             }
         }
         
@@ -161,6 +151,31 @@ public class Arbol<T> implements IArbol<T> {
             nodo = nodo.getIzquierdo();
         }
         return nodo;
+    }
+
+    // Métodos auxiliares para los recorridos
+    private void inordenRecursivo(INodo<T> nodo) {
+        if (nodo != null) {
+            inordenRecursivo(nodo.getIzquierdo());   // Recorrer subárbol izquierdo
+            System.out.println(nodo.getDato());      // Procesar nodo actual
+            inordenRecursivo(nodo.getDerecho());     // Recorrer subárbol derecho
+        }
+    }
+
+    private void preordenRecursivo(INodo<T> nodo) {
+        if (nodo != null) {
+            System.out.println(nodo.getDato());      // Procesar nodo actual
+            preordenRecursivo(nodo.getIzquierdo());  // Recorrer subárbol izquierdo
+            preordenRecursivo(nodo.getDerecho());    // Recorrer subárbol derecho
+        }
+    }
+
+    private void postordenRecursivo(INodo<T> nodo) {
+        if (nodo != null) {
+            postordenRecursivo(nodo.getIzquierdo()); // Recorrer subárbol izquierdo
+            postordenRecursivo(nodo.getDerecho());   // Recorrer subárbol derecho
+            System.out.println(nodo.getDato());      // Procesar nodo actual
+        }
     }
 
 

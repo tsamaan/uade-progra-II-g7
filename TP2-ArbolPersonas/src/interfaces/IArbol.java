@@ -22,35 +22,35 @@ public interface IArbol<T> {
     // Ax: setCantNodos(n) -> getCantNodos() = n
     public void setCantNodos(int nuevaCantNodos);
     
-    // Pre: dato != null
+    // Pre: dato != null, comparador != null
     // Pos: El dato se inserta en el arbol respetando el orden BST
     // Ax: insertar(dato) -> buscar(dato) = true
-    public INodo<T> insertarRecursivo(INodo<T> nodo, T dato);
+    public INodo<T> insertarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador);
 
-    // Pre: dato != null
+    // Pre: dato != null, comparador != null
     // Pos: Retorna true si el dato esta en el arbol, false en caso contrario
     // Ax: buscar(dato) = true <-> dato esta en arbol
-    public boolean buscarRecursivo(INodo<T> nodo, T dato);
+    public boolean buscarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador);
 
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en orden (izq-raiz-der)
     // Ax: recorridoInorden() = secuencia ordenada ascendente de elementos
-    public void recorridoInorden(INodo<T> nodo);
+    public void recorridoInorden();
     
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en preorden (raiz-izq-der)
     // Ax: recorridoPreorden() = secuencia con raiz primero, luego subarboles
-    public void recorridoPreorden(INodo<T> nodo);
+    public void recorridoPreorden();
     
     // Pre: El arbol debe estar inicializado
     // Pos: Imprime los elementos del arbol en postorden (izq-der-raiz)
     // Ax: recorridoPostorden() = secuencia con subarboles primero, luego raiz
-    public void recorridoPostorden(INodo<T> nodo);
+    public void recorridoPostorden();
 
-    // Pre: dato != null
+    // Pre: dato != null, comparador != null
     // Pos: Elimina el dato del arbol manteniendo la propiedad BST
     // Ax: eliminar(dato) -> buscar(dato) = false
-    public INodo<T> eliminarRecursivo(INodo<T> nodo, T dato);
+    public INodo<T> eliminarRecursivo(INodo<T> nodo, T dato, IComparadorPersona comparador);
 
     // Pre: El arbol debe estar inicializado
     // Pos: Retorna una representacion en cadena del arbol

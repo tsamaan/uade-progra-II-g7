@@ -1,5 +1,6 @@
 package test;
 
+import interfaces.IPersona;
 import model.Persona;
 
 public class TestPersona {
@@ -8,10 +9,10 @@ public class TestPersona {
         System.out.println("=== TestPersona ===");
 
         // Crear personas usando el constructor completo
-        Persona p1 = new Persona("Juan Perez", 12345678L);
+        IPersona p1 = new Persona("Juan Perez", 12345678L);
 
         // Crear persona por defecto y luego usar setters
-        Persona p2 = new Persona();
+        IPersona p2 = new Persona();
         p2.setNombre("Ana Gomez");
         p2.setDni(87654321L);
 
