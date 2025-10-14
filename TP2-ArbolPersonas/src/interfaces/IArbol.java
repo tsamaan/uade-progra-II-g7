@@ -57,8 +57,4 @@ public interface IArbol<T> {
     // Ax: toString() = representacion textual del arbol con sus elementos
     public String toString();
 
-    
-
-
-
 }
