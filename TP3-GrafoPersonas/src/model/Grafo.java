@@ -105,10 +105,12 @@ public class Grafo<T> implements IGrafo<T> {
 
     @Override
     public void mostrarMatrizAdyacencia() {
-        System.out.println("Matriz de Adyacencia:");
+        System.out.println("\n╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║            MATRIZ DE ADYACENCIA                            ║");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
         
         if (nodos.isEmpty()) {
-            System.out.println("El grafo está vacío");
+            System.out.println("  El grafo está vacío");
             return;
         }
 
@@ -133,29 +135,45 @@ public class Grafo<T> implements IGrafo<T> {
             }
         }
 
-        // Imprimir encabezado
-        System.out.print("      ");
-        for (T nodo : listaNodos) {
-            String str = nodo.toString();
-            System.out.print(String.format("%-10s", str.substring(0, Math.min(str.length(), 10))));
+        // Calcular ancho de columna basado en el contenido
+        int anchoColumna = 8;
+        
+        // Imprimir encabezado superior
+        System.out.print("        │");
+        for (int i = 0; i < size; i++) {
+            String str = obtenerEtiqueta(listaNodos.get(i), anchoColumna);
+            System.out.print(String.format(" %-" + anchoColumna + "s", str));
+        }
+        System.out.println();
+        
+        // Línea separadora
+        System.out.print("────────┼");
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < anchoColumna + 1; j++) {
+                System.out.print("─");
+            }
         }
         System.out.println();
 
-        // Imprimir filas
+        // Imprimir filas con datos
         for (int i = 0; i < size; i++) {
-            String str = listaNodos.get(i).toString();
-            System.out.print(String.format("%-6s", str.substring(0, Math.min(str.length(), 6))) + "|");
+            String etiqueta = obtenerEtiqueta(listaNodos.get(i), 7);
+            System.out.print(String.format(" %-7s│", etiqueta));
+            
             for (int j = 0; j < size; j++) {
-                System.out.print(String.format("%-10d", matriz[i][j]));
+                String valor = matriz[i][j] == 1 ? "■" : "·";
+                System.out.print(String.format(" %-" + anchoColumna + "s", valor));
             }
             System.out.println();
         }
+        System.out.println();
     }
-
+    
+    
     @Override
     public void bfs(T inicio) {
         if (inicio == null || !nodos.containsKey(inicio)) {
-            System.out.println("El nodo de inicio no existe en el grafo");
+            System.out.println("⚠ El nodo de inicio no existe en el grafo");
             return;
         }
 
@@ -166,10 +184,19 @@ public class Grafo<T> implements IGrafo<T> {
         cola.add(nodoInicio);
         visitados.add(inicio);
 
-        System.out.println("Recorrido BFS:");
+        System.out.println("\n╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║     RECORRIDO BFS (Breadth-First Search)                   ║");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+        System.out.print("  Desde [" + obtenerEtiqueta(inicio, 20) + "]: ");
+        
+        int contador = 0;
         while (!cola.isEmpty()) {
             INodo<T> actual = cola.poll();
-            System.out.print(actual.getDato() + " ");
+            String etiqueta = obtenerEtiqueta(actual.getDato(), 15);
+            
+            if (contador > 0) System.out.print(" → ");
+            System.out.print(etiqueta);
+            contador++;
 
             for (Arista<T> arista : actual.getAristas()) {
                 INodo<T> vecino = arista.getDestino();
@@ -179,34 +206,67 @@ public class Grafo<T> implements IGrafo<T> {
                 }
             }
         }
+        System.out.println("\n  Total de nodos visitados: " + contador);
         System.out.println();
     }
 
     @Override
     public void dfs(T inicio) {
         if (inicio == null || !nodos.containsKey(inicio)) {
-            System.out.println("El nodo de inicio no existe en el grafo");
+            System.out.println("⚠ El nodo de inicio no existe en el grafo");
             return;
         }
 
         Set<T> visitados = new HashSet<>();
-        System.out.println("Recorrido DFS:");
-        dfsRecursivo(nodos.get(inicio), visitados);
+        System.out.println("\n╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║     RECORRIDO DFS (Depth-First Search)                     ║");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+        System.out.print("  Desde [" + obtenerEtiqueta(inicio, 20) + "]: ");
+        
+        int[] contador = {0};  // Usar array para poder modificar en recursión
+        dfsRecursivo(nodos.get(inicio), visitados, contador);
+        
+        System.out.println("\n  Total de nodos visitados: " + contador[0]);
         System.out.println();
     }
 
     // ---- Métodos auxiliares privados
 
-    private void dfsRecursivo(INodo<T> actual, Set<T> visitados) {
+    private void dfsRecursivo(INodo<T> actual, Set<T> visitados, int[] contador) {
         visitados.add(actual.getDato());
-        System.out.print(actual.getDato() + " ");
+        String etiqueta = obtenerEtiqueta(actual.getDato(), 15);
+        
+        if (contador[0] > 0) System.out.print(" → ");
+        System.out.print(etiqueta);
+        contador[0]++;
 
         for (Arista<T> arista : actual.getAristas()) {
             INodo<T> vecino = arista.getDestino();
             if (!visitados.contains(vecino.getDato())) {
-                dfsRecursivo(vecino, visitados);
+                dfsRecursivo(vecino, visitados, contador);
             }
         }
     }
 
+    // Obtiene una etiqueta representativa del nodo para mostrar en la matriz.
+    // Intenta extraer información útil del toString() del nodo.
+    private String obtenerEtiqueta(T nodo, int maxLength) {
+        String str = nodo.toString();
+        
+        // Si es una Persona, intentar extraer solo el nombre
+        if (str.contains("Nombre:")) {
+            int inicio = str.indexOf("Nombre:") + 7;
+            int fin = str.indexOf("\n", inicio);
+            if (fin > inicio) {
+                str = str.substring(inicio, fin).trim();
+            }
+        }
+        
+        // Truncar si es muy largo
+        if (str.length() > maxLength) {
+            return str.substring(0, maxLength - 2) + "..";
+        }
+        
+        return str;
+    }
 }
