@@ -2,8 +2,6 @@ package model;
 
 import interfaces.IGrafo;
 import interfaces.INodo;
-import interfaces.IPersona
-import interfaces.IArista;
 
 import java.util.*;
 
@@ -149,28 +147,6 @@ public class Grafo<T> implements IGrafo<T> {
             System.out.print(String.format("%-6s", str.substring(0, Math.min(str.length(), 6))) + "|");
             for (int j = 0; j < size; j++) {
                 System.out.print(String.format("%-10d", matriz[i][j]));
-            }
-            System.out.println();
-        }
-    }
-
-    @Override
-    public void mostrarListaAdyacencia() {
-        System.out.println("Lista de Adyacencia:");
-        
-        if (nodos.isEmpty()) {
-            System.out.println("El grafo está vacío");
-            return;
-        }
-
-        for (Map.Entry<T, INodo<T>> entrada : nodos.entrySet()) {
-            System.out.print(entrada.getKey() + ": ");
-            
-            INodo<T> nodo = entrada.getValue();
-            List<Arista<T>> aristas = nodo.getAristas();
-            
-            for (Arista<T> arista : aristas) {
-                System.out.print(arista + " ");
             }
             System.out.println();
         }

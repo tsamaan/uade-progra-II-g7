@@ -28,11 +28,6 @@ public interface IGrafo<T> {
     public void mostrarMatrizAdyacencia();
 
     // Pre: El grafo debe estar inicializado
-    // Pos: Muestra la lista de adyacencia del grafo
-    // Ax: mostrarListaAdyacencia() --> muestra la lista de adyacencia por consola
-    public void mostrarListaAdyacencia();
-
-    // Pre: El grafo debe estar inicializado
     // Pos: Realiza un recorrido BFS desde el nodo de inicio
     // Ax: bfs(inicio) --> recorre el grafo en anchura desde el nodo inicio
     public void bfs(T inicio);

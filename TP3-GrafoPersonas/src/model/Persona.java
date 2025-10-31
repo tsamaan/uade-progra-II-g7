@@ -2,7 +2,7 @@ package model;
 
 import interfaces.IPersona;
 
-public class Persona<T> implements IPersona{
+public class Persona implements IPersona{
     
     private String nombre;
     private long dni;
@@ -45,7 +45,7 @@ public class Persona<T> implements IPersona{
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + "\nDNI: " + dni + "\n";
+        return nombre + "(DNI:" + dni + ")";
     }
 
 }
