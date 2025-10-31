@@ -185,7 +185,7 @@ public class Grafo<T> implements IGrafo<T> {
         visitados.add(inicio);
 
         System.out.println("\n╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║     RECORRIDO BFS (Breadth-First Search)                   ║");
+        System.out.println("║     RECORRIDO BFS                                          ║");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         System.out.print("  Desde [" + obtenerEtiqueta(inicio, 20) + "]: ");
         
@@ -219,7 +219,7 @@ public class Grafo<T> implements IGrafo<T> {
 
         Set<T> visitados = new HashSet<>();
         System.out.println("\n╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║     RECORRIDO DFS (Depth-First Search)                     ║");
+        System.out.println("║       RECORRIDO DFS                                        ║");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         System.out.print("  Desde [" + obtenerEtiqueta(inicio, 20) + "]: ");
         
