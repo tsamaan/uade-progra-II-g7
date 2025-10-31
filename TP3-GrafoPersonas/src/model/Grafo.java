@@ -2,7 +2,8 @@ package model;
 
 import interfaces.IGrafo;
 import interfaces.INodo;
-import interfaces.IPersonaIArista;
+import interfaces.IPersona
+import interfaces.IArista;
 
 import java.util.*;
 

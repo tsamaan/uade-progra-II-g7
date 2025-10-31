@@ -1,7 +1,8 @@
 package model;
 
 import interfaces.INodo;
-import interfaces.IPersonaIArista;
+import interfaces.IPersona
+import interfaces.IArista;
 
 import java.util.ArrayList;
 import java.util.List;
