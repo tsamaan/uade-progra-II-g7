@@ -4,7 +4,7 @@ public interface IArista<T> {
     
     // Pre: debe estar inicializado
     // Pos: Retorna el nodo destino de la arista
-    // Ax: El nodo destino retornado es el mismo que fue establecido en la creación o última modificación
+    // Ax: El nodo destino retornado es el mismo que fue establecido en la creacion o ultima modificacion
     public INodo<T> getDestino();
 
     // Pre: destino != null
@@ -14,7 +14,7 @@ public interface IArista<T> {
 
     // Pre: debe estar inicializado
     // Pos: Retorna el peso actual de la arista
-    // Ax: El peso retornado es el mismo que fue establecido en la creación o última modificación
+    // Ax: El peso retornado es el mismo que fue establecido en la creacion o ultima modificacion
     int getPeso();
 
     // Pre: debe estar inicializado, puede ser cualquier valor entero
@@ -23,7 +23,7 @@ public interface IArista<T> {
     void setPeso(int peso);
 
     // Pre: debe estar inicializado
-    // Pos: Retorna una representación en cadena de la arista
-    // Ax: La representación en cadena incluye el dato del nodo destino y el peso de la arista
+    // Pos: Retorna una representacion en cadena de la arista
+    // Ax: La representacion en cadena incluye el dato del nodo destino y el peso de la arista
     String toString();
 }

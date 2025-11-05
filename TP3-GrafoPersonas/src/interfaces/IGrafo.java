@@ -1,6 +1,13 @@
 package interfaces;
 
+import java.util.Map;
+
 public interface IGrafo<T> {
+
+    // Pre: El grafo debe estar inicializado
+    // Pos: Devuelve un mapa con los nodos del grafo
+    // Ax: getNodos() --> devuelve el mapa de nodos del grafo
+    public Map<T, INodo<T>> getNodos();
 
     // Pre: vertice != null
     // Pos: Agrega un vertice al grafo

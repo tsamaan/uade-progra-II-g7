@@ -23,7 +23,7 @@ public interface IPersona {
     public void setDni(long dni);
     
     // Pre: La persona debe estar inicializada
-    // Pos: Retorna una representación en cadena de la persona
-    // Ax: toString() = representación textual con nombre y edad
+    // Pos: Retorna una representacion en cadena de la persona
+    // Ax: toString() = representacion textual con nombre y edad
     public String toString();
 }

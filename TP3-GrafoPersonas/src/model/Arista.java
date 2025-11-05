@@ -10,7 +10,7 @@ public class Arista<T> implements IArista<T> {
 
 // ---- Constructor
     
-// Crea una nueva arista hacia un nodo destino con un peso específico.
+// Crea una nueva arista hacia un nodo destino con un peso especifico.
     public Arista(INodo<T> destino, int peso) {
         this.destino = destino;
         this.peso = peso;
@@ -34,7 +34,7 @@ public class Arista<T> implements IArista<T> {
         this.peso = peso;
     }
 
-// ---- Métodos
+// ---- Metodos
     
     @Override
     public String toString() {

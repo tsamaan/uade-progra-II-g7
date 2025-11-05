@@ -2,6 +2,7 @@ package model;
 
 import interfaces.IGrafo;
 import interfaces.INodo;
+import interfaces.IPersona;
 
 import java.util.*;
 
@@ -24,7 +25,14 @@ public class Grafo<T> implements IGrafo<T> {
     }
 
 
-    // ---- Métodos de la interfaz IGrafo
+    // ---- Getters y Setters
+
+    public Map<T, INodo<T>> getNodos() {
+        return nodos;
+    }
+
+
+    // ---- Metodos de la interfaz IGrafo
 
     @Override
     public void agregarNodo(T valor) {
@@ -75,7 +83,7 @@ public class Grafo<T> implements IGrafo<T> {
         // Agregar la arista desde origen a destino
         nodoOrigen.agregarVecino(nodoDestino, peso);
 
-        // Si no es dirigido, agregar también la arista inversa
+        // Si no es dirigido, agregar tambien la arista inversa
         if (!esDirigido) {
             nodoDestino.agregarVecino(nodoOrigen, peso);
         }
@@ -101,7 +109,7 @@ public class Grafo<T> implements IGrafo<T> {
             arista.getDestino().getDato().equals(destino) && arista.getPeso() == peso
         );
 
-        // Si no es dirigido, eliminar también la arista inversa
+        // Si no es dirigido, eliminar tambien la arista inversa
         if (!esDirigido) {
             INodo<T> nodoDestino = nodos.get(destino);
             List<Arista<T>> aristasDestino = nodoDestino.getAristas();
@@ -120,7 +128,7 @@ public class Grafo<T> implements IGrafo<T> {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         
         if (nodos.isEmpty()) {
-            System.out.println("[!] El grafo está vacio");
+            System.out.println("[!] El grafo esta vacio");
             return;
         }
 
@@ -128,18 +136,18 @@ public class Grafo<T> implements IGrafo<T> {
         int size = listaNodos.size();
         int[][] matriz = new int[size][size];
 
-        // Crear un mapa de índices para acceso rápido
+        // Crear un mapa de indices para acceso rapido
         Map<T, Integer> indices = new HashMap<>();
         for (int i = 0; i < size; i++) {
             indices.put(listaNodos.get(i), i);
         }
 
         // Llenar la matriz recorriendo las aristas de cada nodo
-        //  Este método funciona tanto para grafos dirigidos como no dirigidos.
+        //  Este metodo funciona tanto para grafos dirigidos como no dirigidos.
 
-        // - En grafos NO DIRIGIDOS: la matriz será simétrica (matriz[i][j] = matriz[j][i]) porque al agregar una arista A→B, automáticamente se crea B→A
+        // - En grafos NO DIRIGIDOS: la matriz sera simetrica (matriz[i][j] = matriz[j][i]) porque al agregar una arista A→B, automaticamente se crea B→A
         //
-        // - En grafos DIRIGIDOS: la matriz puede ser asimétrica porque A→B no implica que exista B→A
+        // - En grafos DIRIGIDOS: la matriz puede ser asimetrica porque A→B no implica que exista B→A
         for (int i = 0; i < size; i++) {
             INodo<T> nodo = nodos.get(listaNodos.get(i));
             List<Arista<T>> aristas = nodo.getAristas();
@@ -150,19 +158,26 @@ public class Grafo<T> implements IGrafo<T> {
             }
         }
 
-        // Calcular ancho de columna basado en el contenido
-        int anchoColumna = 8;
+        // Calcular ancho de columna basado en el contenido mas largo
+        int anchoColumna = 0;
+        for (T nodo : listaNodos) {
+            String etiqueta = obtenerEtiqueta(nodo, Integer.MAX_VALUE);
+            anchoColumna = Math.max(anchoColumna, etiqueta.length());
+        }
+        anchoColumna = Math.max(anchoColumna, 3); // Minimo 3 caracteres
         
         // Imprimir encabezado superior
-        System.out.print("        │");
+        System.out.print(String.format("%" + anchoColumna + "s │", ""));
         for (int i = 0; i < size; i++) {
-            String str = obtenerEtiqueta(listaNodos.get(i), anchoColumna);
+            String str = obtenerEtiqueta(listaNodos.get(i), Integer.MAX_VALUE);
             System.out.print(String.format(" %-" + anchoColumna + "s", str));
         }
         System.out.println();
         
-        // Línea separadora
-        System.out.print("────────┼");
+        for (int i = 0; i < anchoColumna; i++) {
+            System.out.print("─");
+        }
+        System.out.print("─┼");
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < anchoColumna + 1; j++) {
                 System.out.print("─");
@@ -172,8 +187,8 @@ public class Grafo<T> implements IGrafo<T> {
 
         // Imprimir filas con datos
         for (int i = 0; i < size; i++) {
-            String etiqueta = obtenerEtiqueta(listaNodos.get(i), 7);
-            System.out.print(String.format(" %-7s│", etiqueta));
+            String etiqueta = obtenerEtiqueta(listaNodos.get(i), Integer.MAX_VALUE);
+            System.out.print(String.format("%" + anchoColumna + "s │", etiqueta));
             
             for (int j = 0; j < size; j++) {
                 String valor = matriz[i][j] == 1 ? "1" : "0";
@@ -221,7 +236,7 @@ public class Grafo<T> implements IGrafo<T> {
                 }
             }
         }
-        System.out.println("\n  Total de nodos visitados: " + contador);
+        System.out.println("\n [+] Total de nodos visitados: " + contador);
         System.out.println();
     }
 
@@ -238,14 +253,14 @@ public class Grafo<T> implements IGrafo<T> {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         System.out.print("  Desde [" + obtenerEtiqueta(inicio, 20) + "]: ");
         
-        int[] contador = {0};  // Usar array para poder modificar en recursión
+        int[] contador = {0};  // Usar array para poder modificar en recursion
         dfsRecursivo(nodos.get(inicio), visitados, contador);
         
-        System.out.println("\n  Total de nodos visitados: " + contador[0]);
+        System.out.println("\n [+] Total de nodos visitados: " + contador[0]);
         System.out.println();
     }
 
-    // ---- Métodos auxiliares privados
+    // ---- Metodos auxiliares privados
 
     private void dfsRecursivo(INodo<T> actual, Set<T> visitados, int[] contador) {
         visitados.add(actual.getDato());
@@ -280,5 +295,10 @@ public class Grafo<T> implements IGrafo<T> {
         
         // Para otros tipos, devolver el toString completo
         return str.trim();
+    }
+
+    public void ejecutarDijkstra(IPersona p1) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ejecutarDijkstra'");
     }
 }

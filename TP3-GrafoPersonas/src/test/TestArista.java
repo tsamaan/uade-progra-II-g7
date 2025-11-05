@@ -22,7 +22,7 @@ public class TestArista {
         // Crear arista destino=b, peso=5
         IArista<IPersona> arista = new Arista<>(nodoB, 5);
 
-        // Verificar getters básicos
+        // Verificar getters basicos
         System.out.println("Destino esperado: Beto -> " + arista.getDestino().getDato().getNombre());
         System.out.println("Peso esperado: 5 -> " + arista.getPeso());
 
