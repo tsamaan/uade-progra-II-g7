@@ -10,7 +10,9 @@ public class Grafo<T> implements IGrafo<T> {
     private Map<T, INodo<T>> nodos;
     private boolean esDirigido;
 
+
     // ---- Constructores
+    
     public Grafo() {
         this.nodos = new HashMap<>();
         this.esDirigido = false;
@@ -21,6 +23,7 @@ public class Grafo<T> implements IGrafo<T> {
         this.esDirigido = esDirigido;
     }
 
+
     // ---- Métodos de la interfaz IGrafo
 
     @Override
@@ -29,6 +32,8 @@ public class Grafo<T> implements IGrafo<T> {
             nodos.put(valor, new Nodo<>(valor));
         }
     }
+
+
 
     @Override
     public void eliminarNodo(T valor) {
@@ -47,6 +52,8 @@ public class Grafo<T> implements IGrafo<T> {
             aristas.removeIf(arista -> arista.getDestino().getDato().equals(valor));
         }
     }
+
+
 
     @Override
     public void agregarArista(T origen, T destino, int peso) {
@@ -73,6 +80,8 @@ public class Grafo<T> implements IGrafo<T> {
             nodoDestino.agregarVecino(nodoOrigen, peso);
         }
     }
+
+
 
     @Override
     public void eliminarArista(T origen, T destino, int peso) {
@@ -103,6 +112,7 @@ public class Grafo<T> implements IGrafo<T> {
         }
     }
 
+
     @Override
     public void mostrarMatrizAdyacencia() {
         System.out.println("\n╔════════════════════════════════════════════════════════════╗");
@@ -110,7 +120,7 @@ public class Grafo<T> implements IGrafo<T> {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
         
         if (nodos.isEmpty()) {
-            System.out.println("  El grafo está vacío");
+            System.out.println("[!] El grafo está vacio");
             return;
         }
 
@@ -124,7 +134,12 @@ public class Grafo<T> implements IGrafo<T> {
             indices.put(listaNodos.get(i), i);
         }
 
-        // Llenar la matriz
+        // Llenar la matriz recorriendo las aristas de cada nodo
+        //  Este método funciona tanto para grafos dirigidos como no dirigidos.
+
+        // - En grafos NO DIRIGIDOS: la matriz será simétrica (matriz[i][j] = matriz[j][i]) porque al agregar una arista A→B, automáticamente se crea B→A
+        //
+        // - En grafos DIRIGIDOS: la matriz puede ser asimétrica porque A→B no implica que exista B→A
         for (int i = 0; i < size; i++) {
             INodo<T> nodo = nodos.get(listaNodos.get(i));
             List<Arista<T>> aristas = nodo.getAristas();
@@ -161,7 +176,7 @@ public class Grafo<T> implements IGrafo<T> {
             System.out.print(String.format(" %-7s│", etiqueta));
             
             for (int j = 0; j < size; j++) {
-                String valor = matriz[i][j] == 1 ? "■" : "·";
+                String valor = matriz[i][j] == 1 ? "1" : "0";
                 System.out.print(String.format(" %-" + anchoColumna + "s", valor));
             }
             System.out.println();
@@ -173,7 +188,7 @@ public class Grafo<T> implements IGrafo<T> {
     @Override
     public void bfs(T inicio) {
         if (inicio == null || !nodos.containsKey(inicio)) {
-            System.out.println("⚠ El nodo de inicio no existe en el grafo");
+            System.out.println("[!] El nodo de inicio no existe en el grafo");
             return;
         }
 
@@ -194,7 +209,7 @@ public class Grafo<T> implements IGrafo<T> {
             INodo<T> actual = cola.poll();
             String etiqueta = obtenerEtiqueta(actual.getDato(), 15);
             
-            if (contador > 0) System.out.print(" → ");
+            if (contador > 0) System.out.print(" -> ");
             System.out.print(etiqueta);
             contador++;
 
@@ -213,7 +228,7 @@ public class Grafo<T> implements IGrafo<T> {
     @Override
     public void dfs(T inicio) {
         if (inicio == null || !nodos.containsKey(inicio)) {
-            System.out.println("⚠ El nodo de inicio no existe en el grafo");
+            System.out.println("[!] El nodo de inicio no existe en el grafo");
             return;
         }
 
@@ -236,7 +251,7 @@ public class Grafo<T> implements IGrafo<T> {
         visitados.add(actual.getDato());
         String etiqueta = obtenerEtiqueta(actual.getDato(), 15);
         
-        if (contador[0] > 0) System.out.print(" → ");
+        if (contador[0] > 0) System.out.print(" -> ");
         System.out.print(etiqueta);
         contador[0]++;
 
@@ -248,25 +263,22 @@ public class Grafo<T> implements IGrafo<T> {
         }
     }
 
+    
     // Obtiene una etiqueta representativa del nodo para mostrar en la matriz.
-    // Intenta extraer información útil del toString() del nodo.
+    // Extrae solo el nombre si es una Persona, o usa el toString() para otros tipos.
     private String obtenerEtiqueta(T nodo, int maxLength) {
         String str = nodo.toString();
         
-        // Si es una Persona, intentar extraer solo el nombre
+        // Si es una Persona, extraer solo el nombre
         if (str.contains("Nombre:")) {
             int inicio = str.indexOf("Nombre:") + 7;
             int fin = str.indexOf("\n", inicio);
             if (fin > inicio) {
-                str = str.substring(inicio, fin).trim();
+                return str.substring(inicio, fin).trim();
             }
         }
         
-        // Truncar si es muy largo
-        if (str.length() > maxLength) {
-            return str.substring(0, maxLength - 2) + "..";
-        }
-        
-        return str;
+        // Para otros tipos, devolver el toString completo
+        return str.trim();
     }
 }
