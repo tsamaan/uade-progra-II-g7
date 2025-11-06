@@ -76,7 +76,7 @@ public class Dijkstra<T> {
         System.out.println();
         for (Map.Entry<T, Integer> entry : distancias.entrySet()) {
             String distancia = entry.getValue() == Integer.MAX_VALUE ? "INF" : String.valueOf(entry.getValue());
-            System.out.println("  → A " + entry.getKey() + " = " + distancia);
+            System.out.println("  -> A " + entry.getKey() + " = " + distancia);
         }
         System.out.println();
     }

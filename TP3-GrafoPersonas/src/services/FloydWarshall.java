@@ -70,7 +70,7 @@ public class FloydWarshall<T> {
         }
         
         // Encabezado
-        System.out.print(String.format("%" + anchoColumna + "s │", ""));
+        System.out.print(String.format("%" + anchoColumna + "s |", ""));
         for (T nodo : claves) {
             System.out.print(String.format(" %-" + anchoColumna + "s", obtenerEtiqueta(nodo)));
         }
@@ -78,19 +78,19 @@ public class FloydWarshall<T> {
         
         // Linea separadora
         for (int i = 0; i < anchoColumna; i++) {
-            System.out.print("─");
+            System.out.print("-");
         }
-        System.out.print("─┼");
+        System.out.print("-+");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < anchoColumna + 1; j++) {
-                System.out.print("─");
+                System.out.print("-");
             }
         }
         System.out.println();
         
         // Datos
         for (int i = 0; i < n; i++) {
-            System.out.print(String.format("%" + anchoColumna + "s │", obtenerEtiqueta(claves.get(i))));
+            System.out.print(String.format("%" + anchoColumna + "s |", obtenerEtiqueta(claves.get(i))));
             for (int j = 0; j < n; j++) {
                 String valor = (dist[i][j] == INF ? "INF" : String.valueOf(dist[i][j]));
                 System.out.print(String.format(" %-" + anchoColumna + "s", valor));

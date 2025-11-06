@@ -69,40 +69,38 @@ public class TestGeneral {
         grafoNoDirigido.bfs(p1);
         grafoNoDirigido.dfs(p1);
 
-        // ═══════════════════════════════════════════════════════════════
         // ALGORITMOS PARA GRAFOS NO DIRIGIDOS
-        // ═══════════════════════════════════════════════════════════════
 
         // Dijkstra - Caminos mas cortos desde un nodo
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] DIJKSTRA - Caminos mas cortos desde " + p1.getNombre());
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         Dijkstra.ejecutar((Grafo<IPersona>) grafoNoDirigido, p1, ((Grafo<IPersona>) grafoNoDirigido).getNodos());
 
         // A* - Busqueda de camino optimo con heuristica
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] A* - Camino optimo de " + p1.getNombre() + " a " + p5.getNombre());
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         // Heuristica simple (retorna 0, hace que A* se comporte como Dijkstra)
         AStar.Heuristica<IPersona> heuristica = (actual, destino) -> 0;
         AStar.ejecutar((Grafo<IPersona>) grafoNoDirigido, p1, p5, heuristica, ((Grafo<IPersona>) grafoNoDirigido).getNodos());
 
         // Floyd-Warshall - Caminos mas cortos entre todos los pares
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] FLOYD-WARSHALL - Distancias entre todos los pares");
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         FloydWarshall.ejecutar((Grafo<IPersona>) grafoNoDirigido, ((Grafo<IPersona>) grafoNoDirigido).getNodos());
 
         // Prim - arbol de Expansion Minima
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] PRIM - arbol de Expansion Minima");
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         Prim.ejecutar((Grafo<IPersona>) grafoNoDirigido, ((Grafo<IPersona>) grafoNoDirigido).getNodos());
 
         // Kruskal - arbol de Expansion Minima
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] KRUSKAL - arbol de Expansion Minima");
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         Kruskal.ejecutar((Grafo<IPersona>) grafoNoDirigido, ((Grafo<IPersona>) grafoNoDirigido).getNodos());
     
     }
@@ -146,20 +144,18 @@ public class TestGeneral {
         grafoDirigido.bfs(p1);
         grafoDirigido.dfs(p1);
 
-        // ═══════════════════════════════════════════════════════════════
         // ALGORITMOS PARA GRAFOS DIRIGIDOS
-        // ═══════════════════════════════════════════════════════════════
 
         // Dijkstra - Caminos mas cortos desde un nodo
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] DIJKSTRA - Caminos mas cortos desde " + p1.getNombre());
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         Dijkstra.ejecutar((Grafo<IPersona>) grafoDirigido, p1, ((Grafo<IPersona>) grafoDirigido).getNodos());
 
         // A* - Busqueda de camino optimo con heuristica
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] A* - Camino optimo de " + p1.getNombre() + " a " + p5.getNombre());
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         // Heuristica basada en diferencia de DNI (ejemplo)
         AStar.Heuristica<IPersona> heuristicaDirigido = (actual, destino) -> {
             return Math.abs((int)(actual.getDni() - destino.getDni())) / 10;
@@ -167,13 +163,13 @@ public class TestGeneral {
         AStar.ejecutar((Grafo<IPersona>) grafoDirigido, p1, p5, heuristicaDirigido, ((Grafo<IPersona>) grafoDirigido).getNodos());
 
         // Floyd-Warshall - Caminos mas cortos entre todos los pares
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         System.out.println("[+] FLOYD-WARSHALL - Distancias entre todos los pares");
-        System.out.println("═".repeat(65));
+        System.out.println("=".repeat(65));
         FloydWarshall.ejecutar((Grafo<IPersona>) grafoDirigido, ((Grafo<IPersona>) grafoDirigido).getNodos());
 
         System.out.println("\n[!] Prim y Kruskal NO se ejecutan en grafos dirigidos");
-        System.out.println("          (estan diseñados solo para grafos no dirigidos)\n");
+        System.out.println("(estan diseñados solo para grafos no dirigidos)\n");
     }
 
 }

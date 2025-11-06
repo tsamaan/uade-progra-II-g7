@@ -2,7 +2,6 @@ package model;
 
 import interfaces.IGrafo;
 import interfaces.INodo;
-import interfaces.IPersona;
 
 import java.util.*;
 
@@ -167,7 +166,7 @@ public class Grafo<T> implements IGrafo<T> {
         anchoColumna = Math.max(anchoColumna, 3); // Minimo 3 caracteres
         
         // Imprimir encabezado superior
-        System.out.print(String.format("%" + anchoColumna + "s │", ""));
+        System.out.print(String.format("%" + anchoColumna + "s |", ""));
         for (int i = 0; i < size; i++) {
             String str = obtenerEtiqueta(listaNodos.get(i), Integer.MAX_VALUE);
             System.out.print(String.format(" %-" + anchoColumna + "s", str));
@@ -175,12 +174,12 @@ public class Grafo<T> implements IGrafo<T> {
         System.out.println();
         
         for (int i = 0; i < anchoColumna; i++) {
-            System.out.print("─");
+            System.out.print("-");
         }
-        System.out.print("─┼");
+        System.out.print("-+");
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < anchoColumna + 1; j++) {
-                System.out.print("─");
+                System.out.print("-");
             }
         }
         System.out.println();
@@ -188,7 +187,7 @@ public class Grafo<T> implements IGrafo<T> {
         // Imprimir filas con datos
         for (int i = 0; i < size; i++) {
             String etiqueta = obtenerEtiqueta(listaNodos.get(i), Integer.MAX_VALUE);
-            System.out.print(String.format("%" + anchoColumna + "s │", etiqueta));
+            System.out.print(String.format("%" + anchoColumna + "s |", etiqueta));
             
             for (int j = 0; j < size; j++) {
                 String valor = matriz[i][j] == 1 ? "1" : "0";
@@ -295,10 +294,5 @@ public class Grafo<T> implements IGrafo<T> {
         
         // Para otros tipos, devolver el toString completo
         return str.trim();
-    }
-
-    public void ejecutarDijkstra(IPersona p1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ejecutarDijkstra'");
     }
 }
